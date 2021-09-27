@@ -46,13 +46,12 @@ function addtoMap(StringDate, intbpmreading) {
 
 //function to get median with sorted values
 function getMedian(sorted_numbers) {
-    const middle = Math.floor(sorted_numbers.length / 2);
+    const mediancount = Math.floor(sorted_numbers.length / 2);
     //calculating the average of two middle numbers
     if (sorted_numbers.length % 2 === 0) {
-        return (sorted_numbers[middle - 1] + sorted_numbers[middle]) / 2.0;
+        return (sorted_numbers[mediancount - 1] + sorted_numbers[mediancount]) / 2.0;
     }
-
-    return sorted_numbers[middle];
+    return sorted_numbers[mediancount];
 }
 
 
