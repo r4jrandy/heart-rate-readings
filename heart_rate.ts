@@ -12,7 +12,7 @@ fs.readFile('./heart-rate.json', (err, jsonfile) => {
     try {
         //core are where all the functions are called
         const heat_rate = JSON.parse(jsonfile);
-        heat_rate.forEach(getDates);
+        heat_rate.forEach(getDatesAndReadings);
         let output = getReadings();
         getOutputFile(output);
     } catch (err) {
@@ -20,7 +20,7 @@ fs.readFile('./heart-rate.json', (err, jsonfile) => {
     }
 });
 
-function getDates(currentValue, index) {
+function getDatesAndReadings(currentValue, index) {
     //Gets timestamp
     const dt = new Date(currentValue.start_time);
     //Getting date from timestamp
