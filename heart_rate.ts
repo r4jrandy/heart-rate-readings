@@ -25,7 +25,7 @@ function getDates(currentValue, index) {
     const dt = new Date(currentValue.start_time);//.getTime();
     //Getting date from timestamp
     //var date = new Date(dt);
-    let StringDate = dt.getMonth() + "/" + dt.getDate() + "/" + dt.getFullYear();
+    let StringDate = dt.getMonth()+1 + "/" + dt.getDate() + "/" + dt.getFullYear();
     //calling the function where reading are linked to the respt. dates
     addtoMap(StringDate, currentValue.bpm);
 };
@@ -44,24 +44,35 @@ function addtoMap(StringDate, intbpmreading) {
     }
 };
 
+//function to get median with sorted values
+function getMedian(sorted_numbers) {
+    const middle = Math.floor(sorted_numbers.length / 2);
+    //calculating the average of two middle numbers
+    if (sorted_numbers.length % 2 === 0) {
+        return (sorted_numbers[middle - 1] + sorted_numbers[middle]) / 2.0;
+    }
+
+    return sorted_numbers[middle];
+}
+
+
 function getReadings() {
     let readings = [];
     for (let i = 0; i < datearray.length; i++) {
         //sorting the readings
         let sorted = (dateMap.get(datearray[i])).sort(function (a, b) { return a - b });
         //getting median
-        let mediancount = Math.round(dateMap.get(datearray[i]).length / 2)
+        let median = getMedian(sorted); 
         //creating JSON structured output
         readings.push({
             "date": datearray[i],
             "bpm": {
                 "min": sorted[0],
                 "max": sorted[dateMap.get(datearray[i]).length - 1],
-                "median": sorted[mediancount]
+                "median": median 
             }
         })
     }
-    //has comple readings
     return readings;
 }
 
