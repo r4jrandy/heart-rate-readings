@@ -21,9 +21,8 @@ fs.readFile('./heart-rate.json', function (err, jsonfile) {
 });
 function getDates(currentValue, index) {
     //Gets timestamp
-    var dt = new Date(currentValue.start_time); //.getTime();
+    var dt = new Date(currentValue.start_time);
     //Getting date from timestamp
-    //var date = new Date(dt);
     var StringDate = dt.getMonth() + 1 + "/" + dt.getDate() + "/" + dt.getFullYear();
     //calling the function where reading are linked to the respt. dates
     addtoMap(StringDate, currentValue.bpm);
